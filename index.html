@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVC</title>
+    <style>
+        :root {
+            --ratio: calc(14 / 40);
+            --scale: 1.1;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background-image: url(https://hive-fn.qpyou.cn/webdev/hive_community/dvc/image/20230615_174631_WLu6jCo6LL.png);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .main_div {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            width: 90%;
+            height: 100%;
+        }
+
+        .main_top_bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            background-color: rgb(0, 115, 222);
+            text-align: center;
+        }
+
+        .main_top_bar ul {
+            list-style-type: none;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main_top_bar li {
+            display: inline-block;
+            width: 16%;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .main_top_bar li:hover {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .main_top_bar_check {
+            background-color: #555;
+        }
+
+        #main_result_bar {
+            width: 100%;
+            flex-wrap: wrap;
+            position: relative;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        #book_div {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .top_bar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            background-color: rgb(0, 0, 0);
+        }
+
+        .option_bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 98%;
+            border: 1px white solid;
+            border-radius: 4px;
+            margin: 2px;
+        }
+
+        .option_bar input {
+            margin: 5px;
+        }
+
+        #select_btn {
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: 900;
+            background-color: white;
+        }
+
+        #search_btn {
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: 900;
+            background-color: white;
+            /* padding-left: 1px;
+            padding-right: 1px; */
+        }
+
+        #search_text {
+            width: 40%;
+            text-align: center;
+            height: 24px;
+            font-size: 20px;
+        }
+
+        #search_select {
+            margin: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #search_select option {
+            font-weight: 600;
+        }
+
+        #element_bar,
+        #obtain_bar {
+            display: none;
+            flex-wrap: wrap;
+        }
+
+        label {
+            color: white;
+            border: 1px solid skyblue;
+            border-radius: 5px;
+            margin: 2px 6px 2px 6px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        label input {
+            cursor: pointer;
+        }
+
+        label input[type='checkbox'] {
+            width: 16px;
+            height: 16px;
+        }
+
+        label img {
+            display: inline;
+            width: 20px;
+            height: 20px;
+        }
+
+        .result_bar {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            width: 100%;
+            margin-top: 0px;
+            flex-wrap: wrap;
+            background-color: rgba(255, 255, 255, 0.75);
+            overflow-y: auto;
+        }
+
+        .dragon_bar {
+            border: 3px black solid;
+            margin: 5px;
+            flex-basis: 30%;
+            background-color: rgb(222, 255, 247);
+            cursor: pointer;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            align-content: center;
+        }
+
+        .dragon_option_bar {
+            flex-basis: 100%;
+            border: 1px black solid;
+            margin: 2px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .dragon_option_bar img {
+            display: inline;
+            width: 16px;
+            height: 16px;
+            vertical-align: text-top;
+        }
+
+        .dragon_img_bar {
+            flex-basis: 100%;
+            border: 1px black solid;
+            margin: 2px;
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            height: 100px;
+        }
+
+        .dragon_img_bar div {
+            flex-basis: 22%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dragon_img_bar div img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .detailed_option_bar table {
+            width: 100%;
+            table-layout: fixed;
+            border: 1px black solid;
+        }
+
+        .detailed_option_bar table td {
+            border: 1px black solid;
+            text-align: center;
+        }
+
+        .detailed_option_bar .left_td {
+            width: 23%;
+        }
+
+        #black_bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 500;
+        }
+
+        #detailed_div {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            border: 1px black solid;
+            background-color: rgb(255, 255, 255);
+            padding: 5px;
+            width: 60%;
+            max-height: 80%;
+            overflow-y: auto;
+            justify-content: space-around;
+            align-items: stretch;
+        }
+
+        .detailed_img_div {
+            flex-basis: 36%;
+            border: 1px black solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #prev_btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: 800;
+            padding: 6px;
+            background-color: white;
+            z-index: 3;
+        }
+
+        #next_btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: 800;
+            padding: 6px;
+            background-color: white;
+            z-index: 3;
+        }
+
+        .did_out_div {
+            position: relative;
+            width: 240px;
+            height: 400px;
+            max-height: 100%;
+        }
+
+        .did_in_div {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .pixel_img_div_name {
+            position: absolute;
+            height: 8%;
+            width: 98%;
+            top: 0%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .pixel_img_div_gender {
+            height: 5%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: absolute;
+            width: 98%;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .gender_img {
+            max-height: 100%;
+        }
+
+        .pixel_img_div_adult {
+            display: flex;
+            position: absolute;
+            width: 98%;
+            height: 32%;
+            top: 13%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .pixel_img_div_hatchling {
+            display: flex;
+            position: absolute;
+            width: 75%;
+            height: 23%;
+            top: 46.5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .pixel_img_div_hatch {
+            display: flex;
+            position: absolute;
+            width: 50%;
+            height: 17%;
+            top: 71%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .pixel_img_div_egg {
+            display: flex;
+            justify-content: space-around;
+            position: absolute;
+            width: 33%;
+            height: 9%;
+            top: 89.5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .pixel_img_div {
+            position: relative;
+            height: 100%;
+            flex-basis: 50%;
+            border-radius: 10%;
+        }
+
+        .pixel_img_adult,
+        .pixel_img_hatchling,
+        .pixel_img_hatch {
+            position: absolute;
+            bottom: 0%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 182px;
+            /* height: 140px; */
+        }
+
+        .pixel_img_egg {
+            position: absolute;
+            bottom: 0%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 46px;
+            height: 46px;
+        }
+
+        .pixel_div_hover {
+            cursor: pointer;
+            transition-duration: 1s;
+            transition-timing-function: linear;
+        }
+
+        .pixel_click_div {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .detailed_option_div_out {
+            flex-basis: 60%;
+            border: 1px black solid;
+            position: relative;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+
+        .detailed_option_div {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            align-content: center;
+        }
+
+        .detailed_option_bar {
+            flex-basis: 100%;
+            border: 1px black solid;
+            margin: 2px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .detailed_option_bar img {
+            display: inline;
+            width: 18px;
+            height: 18px;
+            vertical-align: text-top;
+        }
+
+        .link_span {
+            color: rgb(11, 114, 216);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        #aura_div {
+            position: fixed;
+            width: 70%;
+            height: 70%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            background-color: white;
+            border: 5px brown solid;
+            border-radius: 5px;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(243, 232, 210);
+        }
+
+        .aura_div_top_bar {
+            display: flex;
+            width: 98%;
+            position: sticky;
+            top: 0;
+            background-color: rgb(221, 165, 67);
+            margin: 5px;
+            position: relative;
+            border: 2px black solid;
+            border-radius: 4px;
+        }
+
+        #aura_div_top_name {
+            flex-basis: 100%;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-indent: 2px;
+        }
+
+        #aura_div_top_btn {
+            padding: 0px 2px;
+            cursor: pointer;
+        }
+
+        #aura_div_result {
+            position: relative;
+            margin: 5px;
+            width: 99%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .dragon_aura {
+            width: 182px;
+            height: auto;
+            border: 2px black solid;
+            border-radius: 5px;
+            margin: 5px;
+            position: relative;
+            background-color: rgb(60, 60, 60);
+            overflow: hidden;
+        }
+
+        .dragon_aura_img_div {
+            position: relative;
+            width: 182px;
+            height: 160px;
+        }
+
+        .back_aura_a_babyblue,
+        .back_aura_a_babypink,
+        .back_aura_a_lapislazuli,
+        .back_aura_a_lavender,
+        .back_aura_a_mint,
+        .back_aura_a_orange,
+        .back_aura_a_red,
+        .back_aura_a_yellow {
+            width: calc(500px * var(--ratio) * var(--scale));
+            height: calc(400px * var(--ratio) * var(--scale));
+            bottom: -10%;
+        }
+
+        .back_aura_a2_darkblue,
+        .back_aura_a2_green,
+        .back_aura_a2_purple,
+        .back_aura_a2_red {
+            width: calc(640px * var(--ratio) * var(--scale));
+            height: calc(455px * var(--ratio) * var(--scale));
+            bottom: -13%;
+        }
+
+        .back_aura_b_black,
+        .back_aura_b_blue,
+        .back_aura_b_brown,
+        .back_aura_b_darkbrown,
+        .back_aura_b_green,
+        .back_aura_b_mint,
+        .back_aura_b_navy,
+        .back_aura_b_orange,
+        .back_aura_b_orangered,
+        .back_aura_b_pink,
+        .back_aura_b_purple,
+        .back_aura_b_red,
+        .back_aura_b_sky,
+        .back_aura_b_whight,
+        .back_aura_b_yellow,
+        .back_aura_b_yellowgreen {
+            width: calc(640px * var(--ratio) * var(--scale));
+            height: calc(147px * var(--ratio) * var(--scale));
+            bottom: -7%;
+        }
+
+        .back_aura_s_blackhole {
+            width: calc(520px * var(--ratio) * var(--scale));
+            height: calc(608px * var(--ratio) * var(--scale));
+            bottom: -28%;
+        }
+
+        .back_aura_s_bluelight,
+        .back_aura_s_purplelight {
+            width: calc(898px * var(--ratio) * var(--scale));
+            height: calc(691px * var(--ratio) * var(--scale));
+            bottom: -40%;
+        }
+
+        .back_aura_s_dark {
+            width: calc(800px * var(--ratio) * var(--scale));
+            height: calc(683px * var(--ratio) * var(--scale));
+            bottom: -26%;
+        }
+
+        .back_aura_s_pearl {
+            width: calc(704px * var(--ratio) * var(--scale));
+            height: calc(440px * var(--ratio) * var(--scale));
+            bottom: -18%;
+        }
+
+        .back_aura_s_star {
+            width: calc(704px * var(--ratio) * var(--scale));
+            height: calc(452px * var(--ratio) * var(--scale));
+            bottom: -18%;
+        }
+
+        .back_aura_s_transparent {
+            width: calc(520px * var(--ratio) * var(--scale));
+            height: calc(278px * var(--ratio) * var(--scale));
+            bottom: -20%;
+        }
+
+        .back_aura_s_transparent3 {
+            width: calc(640px * var(--ratio) * var(--scale));
+            height: calc(480px * var(--ratio) * var(--scale));
+            bottom: -18%;
+        }
+
+        .back_aura_s_universe1,
+        .back_aura_s_universe2 {
+            width: calc(869px * var(--ratio) * var(--scale));
+            height: calc(627px * var(--ratio) * var(--scale));
+            bottom: -29%;
+        }
+
+        .front_a {
+            width: calc(536px * var(--ratio) * var(--scale));
+            height: calc(446px * var(--ratio) * var(--scale));
+            bottom: 2%;
+        }
+
+        .front_a2 {
+            width: calc(330px * var(--ratio) * var(--scale));
+            height: calc(330px * var(--ratio) * var(--scale));
+            bottom: 10%;
+        }
+
+        .front_aura_s_bluelight,
+        .front_aura_s_purplelight,
+        .front_aura_s_transparent {
+            width: calc(624px * var(--ratio) * var(--scale));
+            height: calc(577px * var(--ratio) * var(--scale));
+            bottom: -25%;
+        }
+
+        .front_aura_s_dark {
+            width: calc(702px * var(--ratio) * var(--scale));
+            height: calc(540px * var(--ratio) * var(--scale));
+        }
+
+        .front_aura_s_pearl {
+            width: calc(624px * var(--ratio) * var(--scale));
+            height: calc(480px * var(--ratio) * var(--scale));
+            bottom: -10%;
+        }
+
+        .front_aura_s_star {
+            width: calc(336px * var(--ratio) * var(--scale));
+            height: calc(311px * var(--ratio) * var(--scale));
+            bottom: 6%;
+        }
+
+        .front_aura_s_star2 {
+            width: calc(377px * var(--ratio) * var(--scale));
+            height: calc(316px * var(--ratio) * var(--scale));
+            bottom: 6%;
+        }
+
+        .front_aura_s_universe1 {
+            width: calc(520px * var(--ratio) * var(--scale));
+            height: calc(400px * var(--ratio) * var(--scale));
+        }
+
+        .front_aura_s_universe2 {
+            width: calc(520px * var(--ratio) * var(--scale));
+            height: calc(466px * var(--ratio) * var(--scale));
+            bottom: 0%;
+        }
+
+        .aura_dragon_dragon_img {
+            position: absolute;
+            width: calc(100% * var(--scale));
+            bottom: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .aura_dragon_img_img {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dragon_aura_text_div {
+            position: relative;
+            width: 100%;
+            height: 26px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        #tutorial_div {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(243, 232, 210);
+        }
+
+        #tutorial_div_result {
+            position: relative;
+            margin: 10px;
+            overflow-y: auto;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: justify;
+            padding: 0;
+        }
+
+        .tutorial_result_link_span {
+            color: brown;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #train_div {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(243, 232, 210);
+        }
+
+        #train_div_result {
+            position: relative;
+            margin: 10px;
+            overflow-y: auto;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: justify;
+            padding: 0;
+        }
+
+        #personality_div {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(243, 232, 210);
+        }
+
+        #personality_div_result {
+            position: relative;
+            margin: 10px;
+            overflow-y: auto;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: justify;
+            padding: 0;
+        }
+
+        #personality_div_result::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #personality_div_result::-webkit-scrollbar-button {
+            background: transparent;
+            height: 0px;
+        }
+
+        #personality_div_result::-webkit-scrollbar-track-piece {
+            background: transparent;
+        }
+
+        #personality_div_result::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            background-color: rgb(0, 0, 0);
+        }
+
+        #personality_div_result::-webkit-scrollbar-track {
+            box-shadow: transparent;
+        }
+
+        #personality_div_result hr {
+            height: 3px;
+            background-color: #5e5e5e;
+            border-radius: 3px;
+        }
+
+        #personality_div_result table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px auto;
+            /* 自動水平置中 */
+            font-family: Arial, sans-serif;
+        }
+
+        #personality_div_result td {
+            border: 1px solid #5e5e5e;
+            text-align: center;
+        }
+
+        #personality_div_result tr {
+            font-size: 18px;
+        }
+
+        #personality_div_result tr:nth-child(odd) {
+            background-color: #f2f2f2;
+            /* 奇數行背景色 */
+        }
+
+        #personality_div_result tr:nth-child(even) {
+            background-color: #ffffff;
+            /* 偶數行背景色 */
+        }
+
+        #personality_div_result tr:first-child {
+            background-color: #e3f368;
+            /* 第一行背景色 */
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        #personality_div_result .left_td,
+        #personality_div_result .right_td {
+            width: 15%;
+        }
+
+        #moon_div {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            background-color: rgb(243, 232, 210);
+            overflow-y: auto;
+        }
+
+        #moon_result {
+            flex-basis: 98%;
+            position: relative;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .moon_div_title {
+            flex-basis: 100%;
+            margin: 4px;
+            height: 36px;
+            font-size: 24px;
+            text-align: center;
+            background-color: rgb(53, 34, 17);
+            color: rgb(233, 211, 164);
+            border: 4px ridge black;
+            border-radius: 4px;
+        }
+
+        .moon_div_title img {
+            display: inline;
+            width: 24px;
+            height: 24px;
+        }
+
+        #moon_now_table {
+            width: 100%;
+        }
+
+        #moon_now_table h2 {
+            margin-bottom: 0;
+        }
+
+        #moon_now_table table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px auto;
+            font-family: Arial, sans-serif;
+            margin-top: 0;
+        }
+
+        #moon_now_table td {
+            border: 1px solid #ffffff;
+            text-align: center;
+        }
+
+        #moon_now_table tr {
+            font-size: 18px;
+            background-color: rgb(53, 34, 17);
+            color: rgb(233, 211, 164);
+        }
+
+        #moon_now_table tr:first-child {
+            background-color: #08304d;
+            font-weight: bold;
+        }
+
+        #moon_now_table img {
+            display: inline;
+            width: 18px;
+            height: 18px;
+        }
+
+        @media screen and (max-width: 1080px) {
+            :root {
+                --ratio: calc(12 / 40);
+            }
+
+            .main_div {
+                width: 92%;
+            }
+
+            label {
+                margin: 2px 5px 2px 5px;
+            }
+
+            .option_bar input {
+                margin: 4px;
+            }
+
+            #search_text {
+                width: 55%;
+                height: 22px;
+                font-size: 18px;
+            }
+
+            #select_btn,
+            #search_btn {
+                font-size: 16px;
+            }
+
+            #search_select {
+                margin: 4px;
+                font-size: 16px;
+            }
+
+            .dragon_bar {
+                flex-basis: 45%;
+            }
+
+            .dragon_option_bar {
+                font-size: 14px;
+            }
+
+            .dragon_option_bar img {
+                width: 14px;
+                height: 14px;
+            }
+
+            .dragon_img_bar {
+                height: 90px;
+            }
+
+            #detailed_div {
+                width: 75%;
+            }
+
+            .pixel_img_div_name {
+                font-size: 16px;
+            }
+
+            .detailed_option_bar {
+                font-size: 14px;
+            }
+
+            .detailed_option_bar img {
+                width: 14px;
+                height: 14px;
+            }
+
+            #aura_div {
+                width: 80%;
+                height: 80%;
+            }
+
+            .dragon_aura {
+                width: 156px;
+            }
+
+            .dragon_aura_img_div {
+                width: 156px;
+                height: 140px;
+            }
+
+            .dragon_aura_text_div {
+                height: 22px;
+                font-size: 16px;
+            }
+
+            .moon_div_title {
+                margin: 3px;
+                height: 30px;
+                font-size: 20px;
+            }
+
+            .moon_div_title img {
+                width: 20px;
+                height: 20px;
+            }
+
+            #moon_now_table tr {
+                font-size: 15px;
+            }
+
+            #moon_now_table img {
+                width: 15px;
+                height: 15px;
+            }
+        }
+
+        @media screen and (max-width: 520px) {
+            :root {
+                --ratio: calc(10 / 40);
+            }
+
+            .main_div {
+                width: 96%;
+            }
+
+            label {
+                margin: 2px 4px 2px 4px;
+            }
+
+            .option_bar input {
+                margin: 3px;
+            }
+
+            #search_text {
+                width: 70%;
+                height: 20px;
+                font-size: 16px;
+            }
+
+            #select_btn,
+            #search_btn {
+                font-size: 14px;
+            }
+
+            #search_select {
+                margin: 3px;
+                font-size: 14px;
+            }
+
+            .dragon_bar {
+                flex-basis: 92%;
+            }
+
+            .dragon_option_bar {
+                font-size: 12px;
+            }
+
+            .dragon_option_bar img {
+                width: 12px;
+                height: 12px;
+            }
+
+            .dragon_img_bar {
+                height: 70px;
+            }
+
+            #detailed_div {
+                flex-wrap: wrap;
+                width: 90%;
+            }
+
+            .detailed_img_div,
+            .detailed_option_div_out {
+                flex-basis: 100%;
+            }
+
+            #prev_btn,
+            #next_btn {
+                font-size: 16px;
+                padding: 3px;
+            }
+
+            .did_out_div {
+                width: 220px;
+                height: 300px;
+            }
+
+            .pixel_img_div_name {
+                font-size: 14px;
+            }
+
+            .pixel_img_div_gender {
+                height: 15px;
+            }
+
+            .detailed_option_bar {
+                font-size: 12px;
+            }
+
+            .detailed_option_bar img {
+                width: 12px;
+                height: 12px;
+            }
+
+            #aura_div {
+                width: 90%;
+                height: 70%;
+            }
+
+            .dragon_aura {
+                width: 130px;
+            }
+
+            .dragon_aura_img_div {
+                width: 130px;
+                height: 120px;
+            }
+
+            .dragon_aura_text_div {
+                height: 14px;
+                font-size: 12px;
+            }
+
+            #personality_div_result .left_td,
+            #personality_div_result .right_td {
+                width: 20%;
+            }
+
+            .moon_div_title {
+                margin: 2px;
+                height: 24px;
+                font-size: 16px;
+            }
+
+            .moon_div_title img {
+                width: 16px;
+                height: 16px;
+            }
+
+            #moon_now_table tr {
+                font-size: 11px;
+            }
+
+            #moon_now_table img {
+                width: 11px;
+                height: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <div class="main_div">
+        <nav class="main_top_bar">
+            <ul>
+                <li id="main_top_bar_li0" onclick="change_main_top_bar('圖鑑')">圖鑑</li>
+                <li id="main_top_bar_li1" onclick="change_main_top_bar('技巧')" style="display: none;">技巧</li>
+                <li id="main_top_bar_li2" onclick="change_main_top_bar('訓練')" style="display: none;">訓練</li>
+                <li id="main_top_bar_li3" onclick="change_main_top_bar('個性')">個性</li>
+                <li id="main_top_bar_li4" onclick="change_main_top_bar('月相')">月相</li>
+            </ul>
+        </nav>
+        <div id="main_result_bar">
+            <div id="book_div" style="display: none;">
+                <div class="top_bar">
+                    <div class="option_bar">
+                        <input type="button" id="select_btn" value="▼" onclick="change_option_bar(this)">
+                        <input type="button" id="search_btn" value="⟳" onclick="clear_conditional()">
+                        <input type="search" id="search_text" placeholder="輸入龍的名稱或描述" list="dynamicSearchOptions"
+                            autocomplete="off">
+                        <datalist id="dynamicSearchOptions"></datalist>
+                        <select id="search_select" onchange="sort_way(this.value)">
+                            <option value=0>選擇排序方式</option>
+                            <option value=0>遊戲預設</option>
+                            <option value=1>龍蛋點數↓</option>
+                            <option value=2>龍蛋點數↑</option>
+                            <option value=3>遺傳權重↓</option>
+                            <option value=4>遺傳權重↑</option>
+                            <option value=5>成龍顏色↓</option>
+                            <option value=6>成龍顏色↑</option>
+                        </select>
+                    </div>
+                    <div class="option_bar" id="element_bar">
+                        <div style="color: yellow;">
+                            屬性：
+                        </div>
+                        <label>
+                            <input type="checkbox" value="風" id="element0" onclick="change_element()">
+                            <img src="image/element_wind_36.png">
+                        </label>
+                        <label>
+                            <input type="checkbox" value="火" id="element1" onclick="change_element()">
+                            <img src="image/element_fire_36.png">
+                        </label>
+                        <label>
+                            <input type="checkbox" value="水" id="element2" onclick="change_element()">
+                            <img src="image/element_water_36.png">
+                        </label>
+                        <label>
+                            <input type="checkbox" value="土" id="element3" onclick="change_element()">
+                            <img src="image/element_earth_36.png">
+                        </label>
+                        <label>
+                            <input type="checkbox" value="雷" id="element4" onclick="change_element()">
+                            <img src="image/element_lightning_36.png">
+                        </label>
+                        <label>
+                            <input type="checkbox" value="鋼" id="element5" onclick="change_element()">
+                            <img src="image/element_steel_36.png">
+                        </label>
+                        <label>
+                            <input type="checkbox" value="光" id="element6" onclick="change_element()">
+                            <img src="image/element_light_36.png">
+                        </label>
+                        <label>
+                            <input type="checkbox" value="暗" id="element7" onclick="change_element()">
+                            <img src="image/element_dark_36.png">
+                        </label>
+                        <label>
+                            <input type="checkbox" value="夢" id="element8" onclick="change_element()">
+                            <img src="image/element_dream_36.png">
+                        </label>
+                    </div>
+                    <div class="option_bar" id="obtain_bar">
+                        <div style="color: yellow;">
+                            來源：
+                        </div>
+                        <label>
+                            <input type="checkbox" value="希望之森" id="obtain0" onclick="change_obtain()">希望之森
+                        </label>
+                        <label>
+                            <input type="checkbox" value="船骸" id="obtain1" onclick="change_obtain()">船骸
+                        </label>
+                        <label>
+                            <input type="checkbox" value="火山" id="obtain2" onclick="change_obtain()">火山
+                        </label>
+                        <label>
+                            <input type="checkbox" value="風之神殿" id="obtain3" onclick="change_obtain()">風之神殿
+                        </label>
+                        <label>
+                            <input type="checkbox" value="天空神殿" id="obtain4" onclick="change_obtain()">天空神殿
+                        </label>
+                        <label>
+                            <input type="checkbox" value="彩虹樂園" id="obtain5" onclick="change_obtain()">彩虹樂園
+                        </label>
+                        <label>
+                            <input type="checkbox" value="荊棘之森" id="obtain6" onclick="change_obtain()">荊棘之森
+                        </label>
+                        <label>
+                            <input type="checkbox" value="古龍之墓" id="obtain7" onclick="change_obtain()">古龍之墓
+                        </label>
+                        <label>
+                            <input type="checkbox" value="黑暗祭壇" id="obtain8" onclick="change_obtain()">黑暗祭壇
+                        </label>
+                        <label>
+                            <input type="checkbox" value="夢幻晶礦" id="obtain9" onclick="change_obtain()">夢幻晶礦
+                        </label>
+                        <label>
+                            <input type="checkbox" value="混沌之隙" id="obtain10" onclick="change_obtain()">混沌之隙
+                        </label>
+                        <label>
+                            <input type="checkbox" value="地下城堡" id="obtain11" onclick="change_obtain()">地下城堡
+                        </label>
+                        <label>
+                            <input type="checkbox" value="艾弗利亞" id="obtain12" onclick="change_obtain()">艾弗利亞
+                        </label>
+                        <label>
+                            <input type="checkbox" value="龍的請求" id="obtain13" onclick="change_obtain()">龍的請求
+                        </label>
+                        <label>
+                            <input type="checkbox" value="流浪商人" id="obtain14" onclick="change_obtain()">流浪商人
+                        </label>
+                        <label>
+                            <input type="checkbox" value="任務" id="obtain15" onclick="change_obtain()">任務
+                        </label>
+                        <label>
+                            <input type="checkbox" value="繁殖" id="obtain16" onclick="change_obtain()">繁殖
+                        </label>
+                        <label>
+                            <input type="checkbox" value="其他" id="obtain17" onclick="change_obtain()">其他
+                        </label>
+                    </div>
+                </div>
+                <div class="result_bar">
+                </div>
+            </div>
+            <div id="black_bg" style="display: none;" onclick="close_detailed_div()"></div>
+            <div id="detailed_div" style="display: none;">
+                <div class="detailed_img_div">
+                    <div class="did_out_div">
+                    </div>
+                    <input type="button" id="prev_btn" value="＜" onclick="select_did(-1)">
+                    <input type="button" id="next_btn" value="＞" onclick="select_did(+1)">
+                </div>
+                <div class="detailed_option_div_out">
+                    <div class="detailed_option_div">
+                        <div class="detailed_option_bar" id="detailed_option_div_name"></div>
+                        <div class="detailed_option_bar" id="detailed_option_div_en_name"></div>
+                        <div class="detailed_option_bar" id="detailed_option_div_element"></div>
+                        <div class="detailed_option_bar" id="detailed_option_div_obtain"></div>
+                        <div class="detailed_option_bar" id="detailed_option_div_description"></div>
+                        <div class="detailed_option_bar">
+                            <table>
+                                <tr>
+                                    <td class="left_td">個性</td>
+                                    <td>爆發力</td>
+                                    <td>肌力</td>
+                                    <td>集中力</td>
+                                    <td>智力</td>
+                                </tr>
+                                <tr>
+                                    <td id="personality0" class="left_td"></td>
+                                    <td id="p0v0"></td>
+                                    <td id="p0v1"></td>
+                                    <td id="p0v2"></td>
+                                    <td id="p0v3"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="detailed_option_bar">
+                            <table>
+                                <tr>
+                                    <td class="left_td">個性</td>
+                                    <td>爆發力</td>
+                                    <td>肌力</td>
+                                    <td>集中力</td>
+                                    <td>智力</td>
+                                </tr>
+                                <tr>
+                                    <td id="personality1" class="left_td"></td>
+                                    <td id="p1v0"></td>
+                                    <td id="p1v1"></td>
+                                    <td id="p1v2"></td>
+                                    <td id="p1v3"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="detailed_option_bar" id="detailed_option_div_skill0"></div>
+                        <div class="detailed_option_bar" id="detailed_option_div_skill1"></div>
+                        <div class="detailed_option_bar" id="detailed_option_div_point"></div>
+                        <div class="detailed_option_bar" id="detailed_option_div_level"></div>
+                        <div class="detailed_option_bar" id="detailed_option_div_color"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="aura_div" style="display: none;">
+                <div class="aura_div_top_bar">
+                    <div id="aura_div_top_name"></div>
+                    <input type="button" value="❌" id="aura_div_top_btn" onclick="close_aura_div()">
+                </div>
+                <div id="aura_div_result"></div>
+            </div>
+            <div id="tutorial_div" style="display: none;">
+                <div id="tutorial_div_result">
+                    絕大多數的龍會有四種進化階段：蛋、幼體、亞成體、成體，但有少數的龍不會經過幼體或亞成體的進化階段
+                    (例如：<span class="link_span" onclick="dragon_link(this.innerText)">地道龍</span>、
+                    <span class="link_span" onclick="dragon_link(this.innerText)">阿薩克</span>等...)。
+                    可經由照顧來提升龍的幸福度，幸福度越高龍的成長速度就能更快，幸福度過高時龍則會生病，
+                    若長時間不去治癒或是在生病時繼續照顧龍可能會死亡。
+                    <hr>
+                    <span class="tutorial_result_link_span" onclick="toggleContent(this)">龍的獲取方式</span>
+                    <div style="display: none; margin-left: 30px; margin-top: 5px; border: 1px solid #555;">
+                        <span class="tutorial_result_link_span" onclick="toggleContent(this)">一般探險區域</span>
+                        <div style="display: none;">
+                            希望森林、失事船、火山、風之殿、天空寺、彩虹花園。<br>
+                            這些區域每次會顯示3個選項，分別對應3種不同的龍蛋，但不會顯示該龍蛋的名稱及圖片，只會顯示該龍的描述
+                            (可藉由此網頁的圖鑑進行查詢)，要跟伺服器中所有在地圖上的人競爭搶蛋，每固定三分鐘以及有玩家拿走了蛋就會立即刷新。
+                        </div>
+                        <hr>
+                        <span class="tutorial_result_link_span" onclick="toggleContent(this)">艾弗利亞</span>
+                        <div style="display: none;">
+                            支付1000點宇宙結晶即可進入艾弗利亞，進入後會顯示3個選項，分別對應3種不同的龍蛋，但不會顯示該龍蛋的名稱及圖片，
+                            只會顯示該龍的描述，選擇一個蛋後艾弗利亞隨之關閉，不須獲得蛋也可直接關閉艾弗利亞，3顆蛋將會一直留在艾弗利亞，直至關閉艾弗利亞。<br>
+                            可能出現的龍：
+                            <span class="link_span" onclick="dragon_link(this.innerText)">波波莫</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">轟炸龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">冰河古龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">路皮亞</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">風霞斯</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">蘋果肌</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">力龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">閃電古龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">古代神龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">天使龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">盧內拉</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">蜈蚣</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">邱比特</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">星雲</span>。<br>
+                            艾弗利亞限定龍：
+                            <span class="link_span" onclick="dragon_link(this.innerText)">黑暗古代神龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">暗黑天使龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">雪霜冰河古龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">瘋狂力龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">黑暗閃電古龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">嫉妒邱比特龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">黃金蘋果肌龍</span>，
+                            艾弗利亞限定龍會以蛋盒形式獲得，可在龍蛋箱交易所進行交易。
+                        </div>
+                        <hr>
+                        <span class="tutorial_result_link_span" onclick="toggleContent(this)">收容所</span>
+                        <div style="display: none;">
+                            不要的龍可以放生到收容所(成體無法)，提供其他的玩家領養，裡面的龍有機率變成⁠影龍，
+                            每固定三分鐘以及有玩家拿走了龍後就會立即刷新。
+                        </div>
+                        <hr>
+                        <span class="tutorial_result_link_span" onclick="toggleContent(this)">任務</span>
+                        <div style="display: none;">
+                            <span class="link_span" onclick="dragon_link(this.innerText)">聖圖拉</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">貓龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">深淵利刃龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">馬洛登</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">圖騰龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">尼斯湖大水怪</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">德瓦</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">派特羅亞</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">阿薩克</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">骷髏</span>、
+                            辣椒素-<span class="link_span" onclick="dragon_link(this.innerText)">蛋龍</span>、
+                            頭髮翅膀-<span class="link_span" onclick="dragon_link(this.innerText)">翼龍</span>、
+                            紅色外星人-<span class="link_span" onclick="dragon_link(this.innerText)">外星龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">金針菇龍</span>
+                        </div>
+                        <hr>
+                        <span class="tutorial_result_link_span" onclick="toggleContent(this)">每日寶箱</span>
+                        <div style="display: none;">
+                            每天可以在廣場撿的寶箱有機會開出
+                            精美服裝-<span class="link_span" onclick="dragon_link(this.innerText)">小丑</span>，
+                            該龍蛋會進入至信箱裡。
+                        </div>
+                        <hr>
+                        <span class="tutorial_result_link_span" onclick="toggleContent(this)">蜥蜴王國</span>
+                        <div style="display: none;">
+                            2023 9/27之前使用優惠券-NHS30TMBBP可獲得 <span class="link_span"
+                                onclick="dragon_link(this.innerText)">石龍子龍</span><br>
+                            2023 9/12～10/12 活動期間可購買限定蛋盒
+                            <span class="link_span" onclick="dragon_link(this.innerText)">鬃獅蜥龍</span>
+                        </div>
+                        <hr>
+                        <span class="tutorial_result_link_span" onclick="toggleContent(this)">特殊能力</span>
+                        <div style="display: none;">
+                            <span class="link_span" onclick="dragon_link(this.innerText)">地道龍</span>的技能有機會發現
+                            <span class="link_span" onclick="dragon_link(this.innerText)">黃金龍</span>。<br>
+                            <span class="link_span" onclick="dragon_link(this.innerText)">派對龍</span>的技能有機會發現
+                            <span class="link_span" onclick="dragon_link(this.innerText)">女神</span>。<br>
+                            東方四大神龍：
+                            <span class="link_span" onclick="dragon_link(this.innerText)">冰河古龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">力龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">閃電古龍</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">古代神龍</span> 的技能冒險成功後可獲得
+                            <span class="link_span" onclick="dragon_link(this.innerText)">黑暗尼斯</span>。<br>
+                            西方四大神龍：
+                            <span class="link_span" onclick="dragon_link(this.innerText)">盧西歐</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">歐沛克斯</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">菲達斯</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">芙蘿蕾</span> 的技能冒險成功後可獲得
+                            <span class="link_span" onclick="dragon_link(this.innerText)">虛無</span>。
+                        </div>
+                        <hr>
+                        <span class="tutorial_result_link_span" onclick="toggleContent(this)">競技場</span>
+                        <div style="display: none;">
+                            要先有<span class="link_span" onclick="dragon_link(this.innerText)">密特拉</span>
+                            ，使用他的技能賦予戰鬥能力，才能參加競技場戰鬥，打贏有機率獲得
+                            <span class="link_span" onclick="dragon_link(this.innerText)">⁠安格拉</span>。<br>
+                            能夠賦予戰鬥能力的龍有：
+                            <span class="link_span" onclick="dragon_link(this.innerText)">密特拉</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">迦樓羅</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">⁠安格拉</span>、
+                            <span class="link_span" onclick="dragon_link(this.innerText)">泰吉塔</span>。<br><br>
+                            1.先用<span class="link_span" onclick="dragon_link(this.innerText)">密特拉</span>
+                            給與戰鬥能力，會先依照性格（能力有不同傾向）給與隨機的能力值。<br>
+                            2.再用<span class="link_span" onclick="dragon_link(this.innerText)">⁠安格拉</span>給與技能。<br>
+                            3.用<span class="link_span" onclick="dragon_link(this.innerText)">迦樓羅</span>
+                            升級並隨機增加能力，看廣告可以再使用4次，但是只有最後一次升的等級給的能力能夠被降低。<br>
+                            4.用<span class="link_span" onclick="dragon_link(this.innerText)">泰吉塔</span>
+                            降低等級，恢復最近一次升級的加成（數值給不滿意重新上數值）。<br>
+                            等級最高40級，並且升到40就不可以再次降低等級了，刷戰鬥能力要謹慎。
+                        </div>
+                    </div>
+                    <hr>
+                    遊戲中需要有成年的<span class="link_span" onclick="dragon_link(this.innerText)">利貝特</span>
+                    才可進行交易(登記、送禮、接收等...)，建議在遊戲初期先養2~3隻，之後再看需求來增加
+                    <span class="link_span" onclick="dragon_link(this.innerText)">利貝特</span>的數量。<br>
+                </div>
+            </div>
+            <div id="train_div" style="display: none;">
+                <div id="train_div_result">
+
+                </div>
+            </div>
+            <div id="personality_div" style="display: none;">
+                <div id="personality_div_result">
+                    成年龍的光環是由性格所決定的，
+                    除了"<span style="color: green;">普通性格</span>"
+                    和"<span style="color: purple;">瘋狂的</span>"外的全部都是亞成體才會顯示出來。<br>
+                    每一隻龍都會有初始性格以及其隱藏數值(爆發力、肌力、集中力、智力 這四項屬性的基礎值)，
+                    可藉由獲得龍蛋時觀察該龍的訓練面板中的預期性格來進行比對。
+                    <hr>
+                    <span style="color: green;">普通性格</span>
+                    的達成條件皆是由四項的基礎值加上訓練數值來計算的，並且可被非普通性格覆蓋。
+                    <br>
+                    <table>
+                        <tr>
+                            <td style="color: green;" colspan="3">普通性格</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">眼尖的</td>
+                            <td>爆發力最高，最低並相同的至少2種</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">天真爛漫的</td>
+                            <td>爆發力最高，肌力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">莽撞的</td>
+                            <td>爆發力最高，集中力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">急躁的</td>
+                            <td>爆發力最高，智力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">勇敢的</td>
+                            <td>肌力最高，爆發力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">大膽的</td>
+                            <td>肌力最高，最低並相同的至少2種</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">反覆無常的</td>
+                            <td>肌力最高，集中力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">固執的</td>
+                            <td>肌力最高，智力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">冷靜的</td>
+                            <td>集中力最高，爆發力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">沉穩的</td>
+                            <td>集中力最高，肌力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">努力的</td>
+                            <td>集中力最高，最低並相同的至少2種</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">慎重的</td>
+                            <td>集中力最高，智力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">溫和的</td>
+                            <td>智力最高，爆發力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">害羞的</td>
+                            <td>智力最高，肌力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">調皮的</td>
+                            <td>智力最高，集中力最低</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">聰明的</td>
+                            <td>智力最高，最低並相同的至少2種</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <span style="color: purple;">稀有性格</span><br>
+                    <table>
+                        <tr>
+                            <td style="color: purple;" colspan="3">稀有性格</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">平凡的</td>
+                            <td>四屬相同，並且每一項基礎值+訓練值25或以下</td>
+                            <td class="right_td">必定</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">有能力的</td>
+                            <td>四屬相同，並且每一項基礎值+訓練值≥26</td>
+                            <td class="right_td">必定</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">勤奮的</td>
+                            <td>只有訓練一種屬性，並且該屬性訓練7次以上(包括失敗)</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">討人喜歡的</td>
+                            <td>瀏覽量超過300次</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">愛撒嬌的</td>
+                            <td>照顧15次以上</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">純真的</td>
+                            <td>純種第三代</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">有格調的</td>
+                            <td>純種第三代，並且四屬基礎值+訓練值達≥20</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">膽小的</td>
+                            <td>龍生病超過4次</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">傲慢的</td>
+                            <td>瀏覽量超過200次，並且基礎值+訓練值≥25</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">消極的</td>
+                            <td>訓練失敗10次以上</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">完美主義者</td>
+                            <td>四屬基礎值+訓練值達≥20，並且成長時間小於4天(4天內進化至亞成體)</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">寂寞的</td>
+                            <td>訓練次數為0(包括失敗)</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">瘋狂的</td>
+                            <td>對龍蛋使用<span class="link_span" onclick="dragon_link(this.innerText)">多頭蛇</span>的技能</td>
+                            <td class="right_td">必定</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">專注的</td>
+                            <td>單屬基礎值+訓練值150以上</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">乾淨的</td>
+                            <td>純種第五代開始出現</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">高貴的</td>
+                            <td>純種第五代開始出現，並且四屬基礎值+訓練值達≥20</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">安靜的</td>
+                            <td>瀏覽量為0次</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">笨拙的</td>
+                            <td>訓練+3超過10次</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">充滿好奇心的</td>
+                            <td>設定為代表龍後開啟超過20個日常寶箱</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">內向的</td>
+                            <td>照顧次數為0且訓練成功0次(可失敗)，進化至亞成體時必須在孵化場</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">氣度不凡的</td>
+                            <td>四屬分別訓練+3、+5、+9一次(不可失敗)，並且六項照顧分別各一次(龍生病無所謂)</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">兇惡的</td>
+                            <td>只使用低關照條的選項進行照顧(嗯...、還不錯吧?、好累...、超討厭)，並生病2次(訓練失敗一次，避免變成寂寞的)</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">漫不經心的</td>
+                            <td>四屬的能力值(基礎值+訓練值)階段式差異15以上(例如:21、40、5、56)</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">善於交際的</td>
+                            <td>設定為代表龍後開啟他人的個人頁面超過50次</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">有點不足的</td>
+                            <td>瀏覽量為95~99次</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">一絲不苟的</td>
+                            <td>四項的基礎值加訓練值剛好為100(不能訓練失敗、四屬不能相同)</td>
+                            <td class="right_td">機率</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <span style="color: red;">特殊性格</span>
+                    <table>
+                        <tr>
+                            <td style="color: red;" colspan="3">特殊性格</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">災厄的</td>
+                            <td>第一彈卡號龍混亂造型第一代限定，取代普通性格，稀有以上性格可覆蓋</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">末日的</td>
+                            <td>第二彈卡號龍啟示錄造型第一代限定，取代普通性格，稀有以上性格可覆蓋</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">神秘</td>
+                            <td>宇宙之門/艾弗利亞獲得的第一代稀有龍才會出現此性格，(照顧隨意，訓練隨意，取代普通性格)</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                        <tr>
+                            <td class="left_td">未知的</td>
+                            <td>宇宙之門/艾弗利亞獲得的第一代限定龍才會出現此性格，(照顧隨意，不能訓練)</td>
+                            <td class="right_td">必定/可覆蓋</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <a
+                        href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vTdP3EsY4SU_13_kg2pkz2buczRPrVlufZBZ59BO4VGPaTdOWFHYICQ700deEXKoDIx1U_XfqPahnNh/pubhtml#">資料來源</a>
+                    <hr>
+                </div>
+            </div>
+            <div id="moon_div" style="display: none;">
+                <div id="moon_result">
+                    <div id="moon_now_time" class="moon_div_title"></div>
+                    <div id="moon_now_moon" class="moon_div_title"></div>
+                    <div id="moon_now_season" class="moon_div_title"></div>
+                    <div id="moon_now_table">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./index.js" async></script>
+</body>
+
+</html>
