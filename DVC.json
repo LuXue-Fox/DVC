@@ -2162,7 +2162,7 @@
         }
       ],
       "skill": [
-        "",
+        "[召喚五位神]所有守護四個方向的龍聚集在一起，召喚守護中心的龍。(可獲得{麒麟})",
         ""
       ],
       "pixel_img": {
@@ -3223,7 +3223,7 @@
         }
       ],
       "skill": [
-        "",
+        "[召喚五位神]所有守護四個方向的龍聚集在一起，召喚守護中心的龍。(可獲得{麒麟})",
         ""
       ],
       "pixel_img": {
@@ -9744,6 +9744,56 @@
       }
     },
     {
+      "name": "朱雀",
+      "en_name": "Jujag",
+      "png_name": "jujag",
+      "element": "火",
+      "obtain": [
+        {
+          "荊棘之森": "荊棘之森"
+        }
+      ],
+      "description": "這顆蛋在南方感受到強大的氣息",
+      "point": 600,
+      "potential": [
+        {
+          "personality": "眼尖的",
+          "value": [
+            20,
+            0,
+            0,
+            5
+          ]
+        },
+        {
+          "personality": "固執的",
+          "value": [
+            15,
+            30,
+            15,
+            0
+          ]
+        }
+      ],
+      "skill": [
+        "[召喚五位神]所有守護四個方向的龍聚集在一起，召喚守護中心的龍。(可獲得{麒麟})",
+        ""
+      ],
+      "pixel_img": {
+        "egg_code": "r",
+        "num": [
+          {
+            "num": "_01",
+            "code": "r",
+            "sex": [
+              "_m",
+              "_f"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "格利法",
       "en_name": "Griffar",
       "png_name": "griffar",
@@ -11379,7 +11429,7 @@
         }
       ],
       "skill": [
-        "",
+        "[召喚五位神]所有守護四個方向的龍聚集在一起，召喚守護中心的龍。(可獲得{麒麟})",
         ""
       ],
       "pixel_img": {
@@ -13954,6 +14004,45 @@
       }
     },
     {
+      "name": "麒麟",
+      "en_name": "Kirin",
+      "png_name": "kirin",
+      "element": "夢/風",
+      "obtain": [
+        {
+          "其他": "集齊{青龍}、{玄武}、{白虎}、{朱雀}並使用其特殊行動[召喚五位神]獲得"
+        }
+      ],
+      "description": "這顆蛋有著金黃色的角",
+      "potential": [
+        {
+          "personality": "",
+          "value": []
+        },
+        {
+          "personality": "",
+          "value": []
+        }
+      ],
+      "skill": [
+        "",
+        ""
+      ],
+      "pixel_img": {
+        "egg_code": "gy",
+        "num": [
+          {
+            "num": "_01",
+            "code": "gy",
+            "sex": [
+              "_m",
+              "_f"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "相框龍",
       "en_name": "Frame",
       "png_name": "frame",
@@ -14196,6 +14285,67 @@
       "extra_personality": [
         "末日的"
       ]
+    },
+    {
+      "name": "拿鐵龍",
+      "en_name": "Lattegon",
+      "png_name": "lattegon",
+      "element": "水",
+      "obtain": [
+        {
+          "其他": "Dal.Komm Coffee聯名活動"
+        }
+      ],
+      "description": "這顆蛋上面有著奶油",
+      "potential": [
+        {
+          "personality": "",
+          "value": []
+        },
+        {
+          "personality": "",
+          "value": []
+        }
+      ],
+      "skill": [
+        "",
+        ""
+      ],
+      "pixel_img": {
+        "egg_code": "yr",
+        "num": [
+          {
+            "num": "_01",
+            "code": "yr",
+            "sex": [
+              "_m",
+              "_f"
+            ]
+          },
+          {
+            "num": "_02",
+            "code": "yr",
+            "sex": [
+              "_m",
+              "_f"
+            ],
+            "pattern": "拿鐵咖啡外觀"
+          },
+          {
+            "num": "_03",
+            "code": "w",
+            "sex": [
+              "_m",
+              "_f"
+            ],
+            "extra": {
+              "hatchling": true,
+              "hatch": true
+            },
+            "pattern": "白巧克力拿鐵外觀"
+          }
+        ]
+      }
     },
     {
       "name": "金黃毒流",
@@ -15049,8 +15199,13 @@
           ]
         },
         {
-          "personality": "",
-          "value": []
+          "personality": "勇敢的",
+          "value": [
+            0,
+            25,
+            10,
+            10
+          ]
         }
       ],
       "skill": [
@@ -16478,7 +16633,7 @@
       "element": "夢",
       "obtain": [
         {
-          "其他": "2023年合作專屬龍蛋"
+          "其他": "Youtuber'정브르'限時連動活動"
         }
       ],
       "description": "這顆蛋繼承了蜥蜴王國的意志",
@@ -17152,6 +17307,24 @@
     }
   ],
   "basic_aura": [
+    {
+      "name": "黑暗的"
+    },
+    {
+      "name": "黎明的"
+    },
+    {
+      "name": "開朗的"
+    },
+    {
+      "name": "孤獨的"
+    },
+    {
+      "name": "心軟的"
+    },
+    {
+      "name": "外向的"
+    },
     {
       "name": "一絲不苟的"
     },
