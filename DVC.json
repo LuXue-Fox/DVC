@@ -10573,12 +10573,22 @@
       "description": "這顆蛋鑲有紫色的寶石",
       "potential": [
         {
-          "personality": "",
-          "value": []
+          "personality": "勇敢的",
+          "value": [
+            0,
+            30,
+            15,
+            15
+          ]
         },
         {
-          "personality": "",
-          "value": []
+          "personality": "天真爛漫的",
+          "value": [
+            20,
+            0,
+            10,
+            10
+          ]
         }
       ],
       "skill": [
@@ -13297,8 +13307,13 @@
           ]
         },
         {
-          "personality": "",
-          "value": []
+          "personality": "大膽的",
+          "value": [
+            5,
+            25,
+            0,
+            0
+          ]
         }
       ],
       "skill": [
@@ -14299,12 +14314,22 @@
       "description": "這顆蛋上面有著奶油",
       "potential": [
         {
-          "personality": "",
-          "value": []
+          "personality": "溫和的",
+          "value": [
+            0,
+            10,
+            10,
+            30
+          ]
         },
         {
-          "personality": "",
-          "value": []
+          "personality": "聰明的",
+          "value": [
+            5,
+            0,
+            0,
+            30
+          ]
         }
       ],
       "skill": [
