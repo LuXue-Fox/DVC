@@ -53,7 +53,7 @@
     },
     {
       "name": "鳳凰龍",
-      "en_name": "Phoenix",
+      "en_name": "Phoenix Dragon",
       "png_name": "phoenix",
       "element": "火",
       "obtain": [
@@ -4358,7 +4358,7 @@
     },
     {
       "name": "蘋果肌",
-      "en_name": "AppleCheec",
+      "en_name": "AppleCheek",
       "png_name": "applecheek",
       "element": "土",
       "obtain": [
@@ -5521,7 +5521,7 @@
     },
     {
       "name": "菇騎士龍",
-      "en_name": "Mushroom Knight",
+      "en_name": "Mushroom Knight Dragon",
       "png_name": "mushroomknight",
       "element": "土/鋼",
       "obtain": [
@@ -6474,7 +6474,7 @@
     },
     {
       "name": "黃金龍",
-      "en_name": "這顆蛋是由純金組成的。",
+      "en_name": "Gold Dragon",
       "png_name": "gold",
       "element": "光",
       "obtain": [
@@ -6524,7 +6524,7 @@
     },
     {
       "name": "白金龍",
-      "en_name": "White Gold",
+      "en_name": "White Gold Dragon",
       "png_name": "whitegold",
       "element": "光",
       "obtain": [
@@ -6574,7 +6574,7 @@
     },
     {
       "name": "玫瑰金龍",
-      "en_name": "Rose Gold",
+      "en_name": "Rose Gold Dragon",
       "png_name": "rosegold",
       "element": "光",
       "obtain": [
@@ -7464,7 +7464,7 @@
     },
     {
       "name": "影龍",
-      "en_name": "Shadow",
+      "en_name": "Shadow Dragon",
       "png_name": "shadow",
       "element": "暗",
       "obtain": [
@@ -8201,7 +8201,7 @@
     },
     {
       "name": "蛇花龍",
-      "en_name": "Serpent Flower",
+      "en_name": "Serpent Flower Dragon",
       "png_name": "serpentflower",
       "element": "暗/土",
       "obtain": [
@@ -8782,7 +8782,7 @@
     },
     {
       "name": "夢水龍",
-      "en_name": "DreamWater Dragon",
+      "en_name": "Dream Water Dragon",
       "png_name": "dreamwaterdragon",
       "element": "夢",
       "obtain": [
@@ -9745,7 +9745,7 @@
     },
     {
       "name": "朱雀",
-      "en_name": "Jujag",
+      "en_name": "Jujak",
       "png_name": "jujag",
       "element": "火",
       "obtain": [
@@ -14707,6 +14707,54 @@
       ]
     },
     {
+      "name": "強格",
+      "en_name": "Jango",
+      "png_name": "jango",
+      "element": "土",
+      "obtain": [
+        {
+          "其他": "里程商店"
+        }
+      ],
+      "description": "這顆蛋別著黃色的徽章",
+      "potential": [
+        {
+          "personality": "",
+          "value": []
+        },
+        {
+          "personality": "",
+          "value": []
+        }
+      ],
+      "skill": [
+        "",
+        ""
+      ],
+      "pixel_img": {
+        "egg_code": "yr",
+        "num": [
+          {
+            "num": "_01",
+            "code": "yr",
+            "sex": [
+              "_m",
+              "_f"
+            ]
+          },
+          {
+            "num": "_02",
+            "code": "yr",
+            "sex": [
+              "_m",
+              "_f"
+            ],
+            "pattern": "警長出場"
+          }
+        ]
+      }
+    },
+    {
       "name": "梅龍",
       "en_name": "Plumos",
       "png_name": "plumos",
@@ -15275,7 +15323,7 @@
     },
     {
       "name": "禁忌女巫龍",
-      "en_name": "Prohibited Witch Dragon",
+      "en_name": "Forbidden Witch Dragon",
       "png_name": "prohibitedwitchdragon",
       "element": "光",
       "obtain": [
@@ -15325,6 +15373,55 @@
         "未知的",
         "神秘"
       ]
+    },
+    {
+      "name": "聖誕龍",
+      "en_name": "Xmas Dragon",
+      "png_name": "xmasdragon",
+      "element": "光",
+      "obtain": [
+        {
+          "其他": "聖誕節活動"
+        }
+      ],
+      "description": "這顆蛋有著紅色蝴蝶結裝飾",
+      "potential": [
+        {
+          "personality": "",
+          "value": []
+        },
+        {
+          "personality": "",
+          "value": []
+        }
+      ],
+      "skill": [
+        "",
+        ""
+      ],
+      "pixel_img": {
+        "egg_code": "w",
+        "num": [
+          {
+            "num": "_01",
+            "code": "w",
+            "sex": [
+              "_m",
+              "_f"
+            ],
+            "pattern": "光之歌頌外觀"
+          },
+          {
+            "num": "_02",
+            "code": "pb",
+            "sex": [
+              "_m",
+              "_f"
+            ],
+            "pattern": "靜夜的樣子"
+          }
+        ]
+      }
     },
     {
       "name": "天使貓",
@@ -15553,7 +15650,7 @@
     },
     {
       "name": "憐憫芙蘿蕾",
-      "en_name": "Remorse Florea",
+      "en_name": "Remorseful Florea",
       "png_name": "remorseflorea",
       "element": "光/土",
       "obtain": [
@@ -16540,7 +16637,7 @@
     },
     {
       "name": "原礦龍",
-      "en_name": "Rude Ore",
+      "en_name": "Rude Ore Dragon",
       "png_name": "rudeore",
       "element": "夢",
       "obtain": [
