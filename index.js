@@ -813,6 +813,7 @@ function change_moon() {
 
 function moon(eclipse) {
     if (eclipse == 0) return '<img src="image/season_eclipse_0101.png">月蝕';
+    else if (eclipse % 30 == 0) return '<img src="image/season_fullmoon_0101.png">滿月';
     else if (eclipse % 30 <= 8) return '<img src="image/season_old_0101.png">下弦月';
     else if (eclipse % 30 <= 12) return '<img src="image/season_dark_0101.png">殘月';
     else if (eclipse % 30 <= 15) return '<img src="image/season_newmoon_0101.png">新月';

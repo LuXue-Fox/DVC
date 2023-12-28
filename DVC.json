@@ -2193,21 +2193,21 @@
       "point": 1700,
       "potential": [
         {
-          "personality": "",
+          "personality": "莽撞的",
           "value": [
-            "？",
-            "？",
-            "？",
-            "？"
+            30,
+            10,
+            0,
+            10
           ]
         },
         {
-          "personality": "",
+          "personality": "冷靜的",
           "value": [
-            "？",
-            "？",
-            "？",
-            "？"
+            0,
+            10,
+            20,
+            10
           ]
         }
       ],
@@ -11772,8 +11772,13 @@
           ]
         },
         {
-          "personality": "",
-          "value": []
+          "personality": "天真爛漫的",
+          "value": [
+            20,
+            0,
+            5,
+            5
+          ]
         }
       ],
       "skill": [
@@ -14031,12 +14036,22 @@
       "description": "這顆蛋有著金黃色的角",
       "potential": [
         {
-          "personality": "",
-          "value": []
+          "personality": "沉穩的",
+          "value": [
+            10,
+            0,
+            25,
+            10
+          ]
         },
         {
-          "personality": "",
-          "value": []
+          "personality": "大膽的",
+          "value": [
+            0,
+            30,
+            10,
+            0
+          ]
         }
       ],
       "skill": [
@@ -14596,14 +14611,17 @@
       ],
       "extra_illust": {
         "hatch": [
+          "_01_hatch.png",
           "_02_hatch.png",
           "_03_hatch.png"
         ],
         "hatchling": [
+          "_01_hatchling.png",
           "_02_hatchling.png",
           "_03_hatchling.png"
         ],
         "adult": [
+          "_01_adult.png",
           "_02_adult.png",
           "_03_adult.png"
         ]
@@ -14618,6 +14636,24 @@
               "_m",
               "_f"
             ]
+          },
+          {
+            "num": "_02",
+            "code": "b",
+            "sex": [
+              "_m",
+              "_f"
+            ],
+            "pattern": "蒼空外型"
+          },
+          {
+            "num": "_03",
+            "code": "pb",
+            "sex": [
+              "_m",
+              "_f"
+            ],
+            "pattern": "霹靂雷帝外型"
           }
         ]
       }
@@ -14719,12 +14755,22 @@
       "description": "這顆蛋別著黃色的徽章",
       "potential": [
         {
-          "personality": "",
-          "value": []
+          "personality": "勇敢的",
+          "value": [
+            0,
+            25,
+            10,
+            10
+          ]
         },
         {
-          "personality": "",
-          "value": []
+          "personality": "冷靜的",
+          "value": [
+            0,
+            10,
+            25,
+            10
+          ]
         }
       ],
       "skill": [
@@ -15387,12 +15433,22 @@
       "description": "這顆蛋有著紅色蝴蝶結裝飾",
       "potential": [
         {
-          "personality": "",
-          "value": []
+          "personality": "天真爛漫的",
+          "value": [
+            30,
+            0,
+            15,
+            15
+          ]
         },
         {
-          "personality": "",
-          "value": []
+          "personality": "溫和的",
+          "value": [
+            0,
+            15,
+            15,
+            30
+          ]
         }
       ],
       "skill": [
@@ -15409,7 +15465,7 @@
               "_m",
               "_f"
             ],
-            "pattern": "光之歌頌外觀"
+            "pattern": "光之聖誕歌外型"
           },
           {
             "num": "_02",
@@ -15418,7 +15474,16 @@
               "_m",
               "_f"
             ],
-            "pattern": "靜夜的樣子"
+            "pattern": "靜謐之夜外型"
+          },
+          {
+            "num": "_03",
+            "code": "g",
+            "sex": [
+              "_m",
+              "_f"
+            ],
+            "pattern": "星星樹外型"
           }
         ]
       }
